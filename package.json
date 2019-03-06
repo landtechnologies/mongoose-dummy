@@ -1,5 +1,5 @@
 {
-  "name": "mongoose-dummy",
+  "name": "@landtech/mongoose-dummy",
   "version": "1.0.8",
   "description": "Mongoose dummy data generator",
   "main": "index.js",
