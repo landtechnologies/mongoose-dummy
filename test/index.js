@@ -54,7 +54,11 @@ describe('mongoose-dummy', () => {
                 detail: {
                     main_info: String,
                     some_info: String,
-                    none_match: String
+                    none_match: String,
+                    default_data: {
+                        type: String,
+                        default: "default data"
+                    }
                 },
                 created_at: {
                     type: Date,
@@ -65,6 +69,7 @@ describe('mongoose-dummy', () => {
             let randomObject = dummy(model, {
                 ignore: ignoredFields,
                 returnDate: true,
+                useDefaultValues: true,
                 force: {
                   parent: '5af8a4f33f56930349d8f45b'
                 }
@@ -73,6 +78,7 @@ describe('mongoose-dummy', () => {
             randomObject.name.should.be.a('string');
             randomObject.email.should.be.a('string');
             randomObject.detail.none_match.should.be.a('string');
+            randomObject.detail.default_data.should.equal("default data");
             validateEmail(randomObject.email).should.be.true;
             randomObject.birth_date.should.be.a('date');
             genderValues.indexOf(randomObject.gender).should.not.eql(-1);
@@ -80,7 +86,7 @@ describe('mongoose-dummy', () => {
             randomObject.results.should.be.an('array');
             randomObject.results[0].should.have.property('score');
             randomObject.is_student.should.be.a('boolean');
-            randomObject.parent.should.equal('5af8a4f33f56930349d8f45b')
+            randomObject.parent.should.equal('5af8a4f33f56930349d8f45b');
             isObjectId(randomObject.parent).should.be.true;
 
             // Check ignore fields
